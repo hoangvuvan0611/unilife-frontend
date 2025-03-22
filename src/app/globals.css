@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -112,10 +113,19 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
+  html {
+    font-family: 'Nunito', system-ui, sans-serif;
+  }
+  
   * {
     @apply border-border outline-ring/50;
   }
+  
   body {
     @apply bg-background text-foreground;
   }
