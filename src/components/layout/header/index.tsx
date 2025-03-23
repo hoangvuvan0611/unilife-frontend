@@ -1,9 +1,11 @@
 'use client';
 
-import { Globe, Menu, Search, UserCircle } from 'lucide-react';
+import { Globe, Menu, UserCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import Nav from './nav';
+import SearchBar from './search';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,31 +37,24 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/images/uni_life_logo1.png"
-              alt="Airbnb Logo"
+              src="/images/uni-life-logo.png"
+              alt="UniLife Logo"
               width={100}
               height={100}
               priority
             />
           </Link>
 
+          {/* Navigation Menu */}
+          <Nav />   
+
           {/* Search Bar */}
-          <div className="hidden md:flex items-center justify-center flex-1 max-w-2xl mx-8">
-            <div className="flex items-center w-full rounded-full border shadow-sm hover:shadow-md transition-shadow">
-              <button className="px-4 py-1.5 text-sm font-medium border-r">Địa điểm</button>
-              <button className="px-4 py-1.5 text-sm font-medium border-r">Nhận phòng</button>
-              <button className="px-4 py-1.5 text-sm font-medium border-r">Trả phòng</button>
-              <button className="px-4 py-1.5 text-sm font-medium">Khách</button>
-              <button className="p-1.5 ml-2 rounded-full bg-primary text-white">
-                <Search size={16} />
-              </button>
-            </div>
-          </div>
+          <SearchBar />
 
           {/* Right Menu */}
           <div className="flex items-center gap-4">
             <Link href="/host" className="hidden md:block hover:bg-gray-100 px-4 py-1.5 rounded-full text-sm">
-              Cho thuê chỗ ở qua Airbnb
+              Cho thuê trọ qua UniLife
             </Link>
             <button className="p-2 hover:bg-gray-100 rounded-full">
               <Globe size={16} />
@@ -87,7 +82,7 @@ export default function Header() {
                   </div>
                   <div className="border-t-2">
                     <Link href="/host" className="block px-4 py-2 text-sm hover:bg-gray-100">
-                      Cho thuê chỗ ở qua Airbnb
+                      Cho thuê trọ qua UniLife
                     </Link>
                     <Link href="/experiences" className="block px-4 py-2 text-sm hover:bg-gray-100">
                       Tổ chức trải nghiệm
