@@ -1,103 +1,168 @@
-import Image from "next/image";
+'use client';
+
+import RoomCard from "@/components/room/RoomCard";
+import RoomCardSkeleton from "@/components/room/RoomCardSkeleton";
+import Filter, { ViewType, SortType, FilterState } from "@/components/filter";
+import { useEffect, useState } from "react";
+
+const rooms = [
+  {
+    id: 1,
+    images: [
+      '/images/rooms/room1-1.jpg',
+      '/images/rooms/room1-2.jpg',
+      '/images/rooms/room1-3.jpg',
+    ],
+    location: 'Thành phố Hồ Chí Minh, Việt Nam',
+    hostName: 'Hạnh',
+    dateRange: '20 – 25 tháng 4',
+    price: 777830,
+    rating: 4.81,
+  },
+  {
+    id: 2,
+    images: [
+      '/images/rooms/room2-1.jpg',
+      '/images/rooms/room2-2.jpg',
+      '/images/rooms/room2-3.jpg',
+    ],
+    location: 'Thành phố Hồ Chí Minh, Việt Nam',
+    hostName: 'Hạnh',
+    dateRange: '26 tháng 4 – 1 tháng 5',
+    price: 718257,
+    rating: 4.95,
+  },
+  {
+    id: 3,
+    images: [
+      '/images/rooms/room3-1.jpg',
+      '/images/rooms/room3-2.jpg',
+      '/images/rooms/room3-3.jpg',
+    ],
+    location: 'Villetaneuse, Pháp',
+    hostName: 'Erika · Nhân viên hỗ trợ của adepas',
+    dateRange: '17 – 22 tháng 4',
+    price: 1115224,
+    rating: 4.87,
+  },
+  {
+    id: 4,
+    images: [
+      '/images/rooms/room4-1.jpg',
+      '/images/rooms/room4-2.jpg',
+      '/images/rooms/room4-3.jpg',
+    ],
+    location: 'Kecamatan Denpasar Timur, Indonesia',
+    hostName: 'Made',
+    dateRange: '1 – 6 tháng 4',
+    price: 620572,
+    rating: 4.85,
+  },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<typeof rooms>([]);
+  const [viewType, setViewType] = useState<ViewType>('grid');
+  const [filteredData, setFilteredData] = useState<typeof rooms>([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    // Giả lập loading data
+    const timer = setTimeout(() => {
+      setData(rooms);
+      setFilteredData(rooms);
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleFilterChange = (filters: FilterState) => {
+    const filtered = data.filter(room => {
+      // Lọc theo danh mục (nếu có)
+      if (filters.categories.length > 0) {
+        // Thêm logic lọc theo danh mục ở đây
+        // return filters.categories.includes(room.category);
+      }
+
+      // Lọc theo khoảng giá
+      const isInPriceRange = room.price >= filters.price[0] && room.price <= filters.price[1];
+      if (!isInPriceRange) return false;
+
+      // Lọc theo trạng thái (nếu có)
+      if (filters.statuses.length > 0) {
+        // Thêm logic lọc theo trạng thái ở đây
+        // return filters.statuses.includes(room.status);
+      }
+
+      return true;
+    });
+
+    setFilteredData(filtered);
+  };
+
+  const handleSortChange = (sort: SortType) => {
+    const sorted = [...filteredData].sort((a, b) => {
+      switch (sort) {
+        case 'price-asc':
+          return a.price - b.price;
+        case 'price-desc':
+          return b.price - a.price;
+        case 'newest':
+          // Thêm logic sắp xếp theo thời gian ở đây
+          return 0;
+        default:
+          return 0;
+      }
+    });
+
+    setFilteredData(sorted);
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Filter
+        onFilterChange={handleFilterChange}
+        onSortChange={handleSortChange}
+        onViewChange={setViewType}
+      />
+      
+      <div className="mx-auto max-w-7xl py-8">
+        <div 
+          className={`grid gap-6 ${
+            viewType === 'list'
+              ? 'grid-cols-1'
+              : viewType === 'compact'
+              ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'
+              : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+          }`}
+        >
+          {isLoading ? (
+            // Hiển thị skeleton khi đang loading
+            Array.from({ length: 8 }).map((_, index) => (
+              <RoomCardSkeleton key={index} />
+            ))
+          ) : filteredData.length > 0 ? (
+            // Hiển thị danh sách phòng khi có data
+            filteredData.map((room) => (
+              <RoomCard
+                key={room.id}
+                images={room.images}
+                location={room.location}
+                hostName={room.hostName}
+                dateRange={room.dateRange}
+                price={room.price}
+                rating={room.rating}
+              />
+            ))
+          ) : (
+            // Hiển thị thông báo khi không có data
+            <div className="col-span-full text-center py-10">
+              <p className="text-gray-500">Không tìm thấy phòng trọ nào</p>
+            </div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }

@@ -32,15 +32,15 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b bg-white/80 backdrop-blur-sm">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="container mx-auto max-w-7xl">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
               src="/images/uni-life-logo.png"
               alt="UniLife Logo"
-              width={100}
-              height={100}
+              width={95}
+              height={95}
               priority
             />
           </Link>
