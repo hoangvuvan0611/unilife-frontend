@@ -47,7 +47,7 @@ export default function Filter({ onViewChange, onSortChange, onFilterChange }: F
 
   return (
     <div className="mt-[20px]">
-      <div className="max-w-7xl bg-[#f9f9f9] mx-auto px-4">
+      <div className="max-w-7xl bg-[#f9f9f9] mx-auto px-4 rounded-lg">
         <div className="flex flex-col">
           {/* Header với nút Filter và các điều khiển khác */}
           <div className="flex items-center justify-between py-4">

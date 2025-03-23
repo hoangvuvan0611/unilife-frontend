@@ -1,7 +1,7 @@
 'use client';
 
-import { PAGE_FOOD, PAGE_HOME, PAGE_JOB, REF_FOOD, REF_HOME, REF_JOB } from "@/common/consts";
-import { Pizza, PersonStanding, Home } from "lucide-react";
+import { PAGE_CEDE, PAGE_FOOD, PAGE_HOME, PAGE_JOB, PAGE_RELAX, REF_CEDE, REF_FOOD, REF_HOME, REF_JOB, REF_RELAX } from "@/common/consts";
+import { Pizza, PersonStanding, Home, Users, Palmtree } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 
@@ -14,12 +14,24 @@ const navigations = [
   },
   {
     id: 2,
+    label: PAGE_CEDE,
+    href: REF_CEDE,
+    icon: <Users size={15}/>
+  },
+  {
+    id: 3,
+    label: PAGE_RELAX,
+    href: REF_RELAX,
+    icon: <Palmtree size={15}/>
+  },
+  {
+    id: 4,
     label: PAGE_FOOD,
     href: REF_FOOD,
     icon: <Pizza size={15}/>
   },
   {
-    id: 3,
+    id: 5,
     label: PAGE_JOB,
     href: REF_JOB,
     icon: <PersonStanding size={15}/>

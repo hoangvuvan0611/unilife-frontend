@@ -13,8 +13,8 @@ export default function SearchBar() {
           flex items-center rounded-full border shadow-sm 
           transition-all duration-300 ease-in-out
           ${isFocused 
-            ? 'shadow-md w-[400px]' 
-            : 'hover:shadow-md w-[300px]'
+            ? 'shadow-md w-[300px]' 
+            : 'hover:shadow-md w-[250px]'
           }
         `}
       >
