@@ -62,7 +62,7 @@ export default function EntertainmentPage() {
                                 src={place.imageUrl} 
                                 alt={place.name}
                                 fill
-                                className="w-full h-full object-cover"
+                                className="object-cover"
                             />
                         </div>
                         <div className="p-4">

@@ -9,9 +9,9 @@ const rooms = [
   {
     id: 1,
     images: [
-      '/images/rooms/room1-1.jpg',
-      '/images/rooms/room1-2.jpg',
-      '/images/rooms/room1-3.jpg',
+      '/images/rooms/room-test.png',
+      '/images/rooms/room-test.png',
+      '/images/rooms/room-test.png',
     ],
     location: 'Thành phố Hồ Chí Minh, Việt Nam',
     hostName: 'Hạnh',
@@ -22,9 +22,9 @@ const rooms = [
   {
     id: 2,
     images: [
-      '/images/rooms/room2-1.jpg',
-      '/images/rooms/room2-2.jpg',
-      '/images/rooms/room2-3.jpg',
+      '/images/room-test.png',
+      '/images/room-test.png',
+      '/images/room-test.png',
     ],
     location: 'Thành phố Hồ Chí Minh, Việt Nam',
     hostName: 'Hạnh',
@@ -35,9 +35,9 @@ const rooms = [
   {
     id: 3,
     images: [
-      '/images/rooms/room3-1.jpg',
-      '/images/rooms/room3-2.jpg',
-      '/images/rooms/room3-3.jpg',
+      '/images/room-test.png',
+      '/images/room-test.png',
+      '/images/room-test.png',
     ],
     location: 'Villetaneuse, Pháp',
     hostName: 'Erika · Nhân viên hỗ trợ của adepas',
@@ -48,9 +48,9 @@ const rooms = [
   {
     id: 4,
     images: [
-      '/images/rooms/room4-1.jpg',
-      '/images/rooms/room4-2.jpg',
-      '/images/rooms/room4-3.jpg',
+      '/images/room-test.png',
+      '/images/room-test.png',
+      '/images/room-test.png',
     ],
     location: 'Kecamatan Denpasar Timur, Indonesia',
     hostName: 'Made',

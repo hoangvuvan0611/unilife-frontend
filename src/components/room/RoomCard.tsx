@@ -57,7 +57,7 @@ export default function RoomCard({
         {/* Image carousel */}
         <div className="relative h-full">
           <Image
-            src={'/images/image.png'}
+            src={'/images/room-test.png'}
             alt={`Room in ${location}`}
             fill
             className="object-cover"
