@@ -58,9 +58,10 @@ export default function EntertainmentPage() {
                 {entertainmentPlaces.map((place) => (
                     <div key={place.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div className="h-48 w-full bg-gray-200">
-                            <img 
+                            <Image 
                                 src={place.imageUrl} 
                                 alt={place.name}
+                                fill
                                 className="w-full h-full object-cover"
                             />
                         </div>

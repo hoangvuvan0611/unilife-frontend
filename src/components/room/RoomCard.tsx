@@ -21,7 +21,6 @@ export default function RoomCard({
   dateRange,
   price,
   rating,
-  isSuperHost
 }: RoomCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
