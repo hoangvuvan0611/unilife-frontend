@@ -32,7 +32,7 @@ export default function AdminLayout({
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-white border-r">
           <div className="flex items-center justify-between mb-5">
-            <span className="text-xl font-semibold">Admin Panel</span>
+            <span className="text-xl font-bold text-lime-600">UNI LIFE</span>
             <button
               onClick={() => setIsSidebarOpen(false)}
               className="p-2 rounded-lg hover:bg-gray-100"
