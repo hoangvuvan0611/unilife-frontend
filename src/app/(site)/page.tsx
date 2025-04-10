@@ -15,7 +15,7 @@ const rooms = [
     ],
     location: 'Thành phố Hồ Chí Minh, Việt Nam',
     hostName: 'Hạnh',
-    dateRange: '20 – 25 tháng 4',
+    dateRange: '21 – 25 tháng 4',
     price: 777830,
     rating: 4.81,
   },
