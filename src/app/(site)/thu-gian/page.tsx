@@ -33,12 +33,11 @@ export default function EntertainmentPage() {
             {/* Hero Section với ảnh nền */}
             <div className="relative h-[120px] rounded-lg overflow-hidden">
                 {/* Ảnh nền */}
-                <div className="absolute inset-0">
+                <div className="relative inset-0">
                     <Image 
                         src="/images/relax-banner1.png" 
                         alt="Ẩm thực"
                         fill
-                        className="w-full h-full object-cover"
                     />
                 </div>
 
@@ -57,12 +56,11 @@ export default function EntertainmentPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {entertainmentPlaces.map((place) => (
                     <div key={place.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                        <div className="h-48 w-full bg-gray-200">
+                        <div className="h-60  bg-gray-200 relative">
                             <Image 
                                 src={place.imageUrl} 
                                 alt={place.name}
                                 fill
-                                className="object-cover"
                             />
                         </div>
                         <div className="p-4">
