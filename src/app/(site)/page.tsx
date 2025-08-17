@@ -2,7 +2,7 @@
 
 import RoomCard from "@/components/room/RoomCard";
 import RoomCardSkeleton from "@/components/room/RoomCardSkeleton";
-import Filter, { ViewType, SortType, FilterState } from "@/components/filter";
+import FilterBox, { ViewType, SortType, FilterState } from "@/components/filter";
 import { useEffect, useState } from "react";
 
 const rooms = [
@@ -121,7 +121,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Filter
+      <FilterBox
         onFilterChange={handleFilterChange}
         onSortChange={handleSortChange}
         onViewChange={setViewType}

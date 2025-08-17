@@ -71,7 +71,7 @@ export default function Header() {
 
               {/* Dropdown Menu */}
               {isMenuOpen && (
-                <div ref={menuRef} className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg py-2">
+                <div ref={menuRef} className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl py-2 border-t-2">
                   <div className="py-2">
                     <Link href="/register" className="block px-4 py-2 text-sm hover:bg-gray-100">
                       Đăng ký

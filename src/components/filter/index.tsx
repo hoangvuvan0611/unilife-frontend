@@ -23,7 +23,7 @@ interface FilterProps {
   onFilterChange?: (filters: FilterState) => void;
 }
 
-export default function Filter({ onViewChange, onSortChange, onFilterChange }: FilterProps) {
+export default function FilterBox({ onViewChange, onSortChange, onFilterChange }: FilterProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeFilters, setActiveFilters] = useState<FilterState>({
     categories: [],
@@ -74,7 +74,6 @@ export default function Filter({ onViewChange, onSortChange, onFilterChange }: F
                 )}
               </button>
             </div>
-
             {/* Right side - View type and Sort */}
             <div className="flex items-center gap-4">
               <ViewTypeSelector onChange={onViewChange} />
