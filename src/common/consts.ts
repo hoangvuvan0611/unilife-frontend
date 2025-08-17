@@ -10,3 +10,9 @@ export const REF_RELAX = '/thu-gian';
 export const REF_FOOD = '/am-thuc';
 export const REF_JOB = '/viec-lam';
 
+// Item storage
+export const LOCALSTORAGE_ACCESS_TOKEN = "access_token";
+
+
+// Response Status
+export const RESPONSE_STATUS_401 = 401;
