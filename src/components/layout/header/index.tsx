@@ -39,8 +39,8 @@ export default function Header() {
             <Image
               src="/images/uni-life-logo.png"
               alt="UniLife Logo"
-              width={95}
-              height={95}
+              width={65}
+              height={55}
               priority
             />
           </Link>

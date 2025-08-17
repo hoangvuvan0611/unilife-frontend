@@ -43,7 +43,7 @@ export default function RoomCard({
   };
 
   return (
-    <div className="max-w-7xl relative flex flex-col space-y-2">
+    <div className="max-w-7xl relative flex flex-col space-y-2 hover:shadow-2xl p-4 rounded-2xl">
       <div className="relative aspect-square overflow-hidden rounded-xl">
         <button 
           onClick={() => setIsLiked(!isLiked)}
