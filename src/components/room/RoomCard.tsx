@@ -2,35 +2,25 @@
 
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
-import { useState } from 'react';
+import {useState} from "react";
+import {Room} from "@/models/room";
 
 interface RoomCardProps {
-  images: string[];
-  location: string;
-  hostName: string;
-  dateRange: string;
-  price: number;
-  rating: number;
-  isSuperHost?: boolean;
+  room: Room;
 }
 
 export default function RoomCard({
-  images,
-  location,
-  hostName,
-  dateRange,
-  price,
-  rating,
+  room
 }: RoomCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % room?.images.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImageIndex((prev) => (prev - 1 + room?.images.length) % room?.images.length);
   };
 
   const formatPrice = (price: number) => {
@@ -43,7 +33,7 @@ export default function RoomCard({
   };
 
   return (
-    <div className="max-w-7xl relative flex flex-col space-y-2 hover:shadow-2xl p-4 rounded-2xl">
+    <div className="max-w-7xl relative flex flex-col space-y-2 hover:shadow-2xl p-2 rounded-2xl">
       <div className="relative aspect-square overflow-hidden rounded-xl">
         <button 
           onClick={() => setIsLiked(!isLiked)}
@@ -57,13 +47,13 @@ export default function RoomCard({
         {/* Image carousel */}
         <div className="relative h-full">
           <Image
-            src={'/images/room-test.png'}
-            alt={`Room in ${location}`}
+            src={room?.images[currentImageIndex]}
+            alt={`Room in ${room?.address}`}
             fill
             className="object-cover"
           />
           
-          {images.length > 1 && (
+          {room?.images.length > 1 && (
             <>
               <button
                 onClick={prevImage}
@@ -88,7 +78,7 @@ export default function RoomCard({
               
               {/* Dots indicator */}
               <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 space-x-1">
-                {images.map((_, index) => (
+                {room?.images.map((_, index) => (
                   <span
                     key={index}
                     className={`h-1.5 w-1.5 rounded-full ${
@@ -103,8 +93,11 @@ export default function RoomCard({
       </div>
 
       {/* Room details */}
+      <div className="font-bold">
+        {room?.name}
+      </div>
       <div className="flex justify-between">
-        <div className="font-medium">{location}</div>
+        <div className="font-medium text-sm">Địa chỉ: {room?.address}</div>
         <div className="flex items-center gap-1">
           <svg
             viewBox="0 0 32 32"
@@ -113,13 +106,13 @@ export default function RoomCard({
           >
             <path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z" />
           </svg>
-          <span>{rating}</span>
+          <span>{room?.rating}</span>
         </div>
       </div>
-      <div className="text-gray-500">Chủ nhà: {hostName}</div>
-      <div className="text-gray-500">{dateRange}</div>
-      <div className="font-medium">
-        {formatPrice(price)} <span className="font-normal">/ đêm</span>
+      <div className="text-gray-500 text-sm">Chủ trọ: {room?.contactName}</div>
+      <div className="text-gray-500 text-sm">Liên hệ: {room?.contactPhone}</div>
+      <div className="font-bold">
+        {formatPrice(room?.price)} <span className="font-bold">/ tháng</span>
       </div>
     </div>
   );

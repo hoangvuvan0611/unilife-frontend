@@ -2,7 +2,7 @@ import { LOCALSTORAGE_ACCESS_TOKEN, REF_HOME, RESPONSE_STATUS_401 } from '@/comm
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: process.env.API_BASE_URL_BACKEND_SERVICE,
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     timeout: 60000,
     headers: {
         "Content-Type": "application/json"

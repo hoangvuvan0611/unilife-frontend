@@ -1,9 +1,9 @@
 export interface Room {
     id: string;
-    title: string;
+    name: string;
     description: string;
-    price: string;
-    area: string;
+    price: number;
+    area: number;
     roomTypeId: string;
     roomType: string;
     address: string;
@@ -22,4 +22,5 @@ export interface Room {
     updatedAt: string;
     createdBy: string;
     updatedBy: string;
+    images: string[];
 }

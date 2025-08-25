@@ -4,168 +4,31 @@ import RoomCard from "@/components/room/RoomCard";
 import RoomCardSkeleton from "@/components/room/RoomCardSkeleton";
 import FilterBox, { ViewType, SortType, FilterState } from "@/components/filter";
 import { useEffect, useState } from "react";
-
-const rooms = [
-  {
-    id: 1,
-    images: [
-      '/images/rooms/room-test.png',
-      '/images/rooms/room-test.png',
-      '/images/rooms/room-test.png',
-    ],
-    location: 'Thành phố Hồ Chí Minh, Việt Nam',
-    hostName: 'Hạnh',
-    dateRange: '21 – 25 tháng 4',
-    price: 777830,
-    rating: 4.81,
-  },
-  {
-    id: 2,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Thành phố Hồ Chí Minh, Việt Nam',
-    hostName: 'Hạnh',
-    dateRange: '26 tháng 4 – 1 tháng 5',
-    price: 718257,
-    rating: 4.95,
-  },
-  {
-    id: 3,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Villetaneuse, Pháp',
-    hostName: 'Erika · Nhân viên hỗ trợ của adepas',
-    dateRange: '17 – 22 tháng 4',
-    price: 1115224,
-    rating: 4.87,
-  },
-  {
-    id: 4,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Kecamatan Denpasar Timur, Indonesia',
-    hostName: 'Made',
-    dateRange: '1 – 6 tháng 4',
-    price: 620572,
-    rating: 4.85,
-  },
-    {
-    id: 5,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Kecamatan Denpasar Timur, Indonesia',
-    hostName: 'Made',
-    dateRange: '1 – 6 tháng 4',
-    price: 620572,
-    rating: 4.85,
-  },
-    {
-    id: 6,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Kecamatan Denpasar Timur, Indonesia',
-    hostName: 'Made',
-    dateRange: '1 – 6 tháng 4',
-    price: 620572,
-    rating: 4.85,
-  },
-  {
-    id: 7,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Kecamatan Denpasar Timur, Indonesia',
-    hostName: 'Made',
-    dateRange: '1 – 6 tháng 4',
-    price: 620572,
-    rating: 4.85,
-  },
-  {
-    id: 8,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Kecamatan Denpasar Timur, Indonesia',
-    hostName: 'Made',
-    dateRange: '1 – 6 tháng 4',
-    price: 620572,
-    rating: 4.85,
-  },
-  {
-    id: 9,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Kecamatan Denpasar Timur, Indonesia',
-    hostName: 'Made',
-    dateRange: '1 – 6 tháng 4',
-    price: 620572,
-    rating: 4.85,
-  },
-  {
-    id: 10,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Kecamatan Denpasar Timur, Indonesia',
-    hostName: 'Made',
-    dateRange: '1 – 6 tháng 4',
-    price: 620572,
-    rating: 4.85,
-  },
-  {
-    id: 11,
-    images: [
-      '/images/room-test.png',
-      '/images/room-test.png',
-      '/images/room-test.png',
-    ],
-    location: 'Kecamatan Denpasar Timur, Indonesia',
-    hostName: 'Made',
-    dateRange: '1 – 6 tháng 4',
-    price: 620572,
-    rating: 4.85,
-  },
-];
+import {roomApi} from "@/services/roomApi";
+import {Room} from "@/models/room";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<typeof rooms>([]);
+  const [data, setData] = useState<Room[]>([]);
   const [viewType, setViewType] = useState<ViewType>('grid');
-  const [filteredData, setFilteredData] = useState<typeof rooms>([]);
+  const [filteredData, setFilteredData] = useState<Room[]>([]);
 
   useEffect(() => {
-    // Giả lập loading data
-    const timer = setTimeout(() => {
-      setData(rooms);
-      setFilteredData(rooms);
-      setIsLoading(false);
-    }, 2000);
 
-    return () => clearTimeout(timer);
+    roomApi.getShowInitList(0, 10)
+        .then((response) => {
+          setData(response.dataList);
+          setFilteredData(response.dataList);
+          setIsLoading(false);
+        })
+
+    // Giả lập loading data
+    // const timer = setTimeout(() => {
+    //   setFilteredData(rooms);
+    //   setIsLoading(false);
+    // }, 2000);
+
+    // return () => clearTimeout(timer);
   }, []);
 
   const handleFilterChange = (filters: FilterState) => {
@@ -211,49 +74,43 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <FilterBox
-        onFilterChange={handleFilterChange}
-        onSortChange={handleSortChange}
-        onViewChange={setViewType}
-      />
-      
-      <div className="mx-auto max-w-7xl py-8">
-        <div 
-          className={`grid gap-6 ${
-            viewType === 'list'
-              ? 'grid-cols-1'
-              : viewType === 'compact'
-              ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'
-              : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-          }`}
-        >
-          {isLoading ? (
-            // Hiển thị skeleton khi đang loading
-            Array.from({ length: 8 }).map((_, index) => (
-              <RoomCardSkeleton key={index} />
-            ))
-          ) : filteredData.length > 0 ? (
-            // Hiển thị danh sách phòng khi có data
-            filteredData.map((room) => (
-              <RoomCard
-                key={room.id}
-                images={room.images}
-                location={room.location}
-                hostName={room.hostName}
-                dateRange={room.dateRange}
-                price={room.price}
-                rating={room.rating}
-              />
-            ))
-          ) : (
-            // Hiển thị thông báo khi không có data
-            <div className="col-span-full text-center py-10">
-              <p className="text-gray-500">Không tìm thấy phòng trọ nào</p>
-            </div>
-          )}
+      <div className="min-h-screen bg-white">
+        <FilterBox
+            onFilterChange={handleFilterChange}
+            onSortChange={handleSortChange}
+            onViewChange={setViewType}
+        />
+
+        <div className="mx-auto max-w-7xl py-8">
+          <div
+              className={`grid gap-6 ${
+                  viewType === 'list'
+                      ? 'grid-cols-1'
+                      : viewType === 'compact'
+                          ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'
+                          : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+              }`}
+          >
+            {isLoading ? (
+                // Hiển thị skeleton khi đang loading
+                Array.from({length: 8}).map((_, index) => (
+                    <RoomCardSkeleton key={index}/>
+                ))
+            ) : filteredData.length > 0 ? (
+                // Hiển thị danh sách phòng khi có data
+                filteredData.map((room) => (
+                    <RoomCard
+                        room={room}
+                    />
+                ))
+            ) : (
+                // Hiển thị thông báo khi không có data
+                <div className="col-span-full text-center py-10">
+                  <p className="text-gray-500">Không tìm thấy phòng trọ nào</p>
+                </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
   );
 }
